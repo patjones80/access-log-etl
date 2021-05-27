@@ -17,7 +17,7 @@ def get_access_timestamp(access_time):
     return (_dt - datetime(1970, 1, 1)) // SECOND
 
 def get_access_log():
-	# get_creds is an abstraction layer to the file where credentials are kept
+    # get_creds is an abstraction layer to the file where credentials are kept
     creds = get_creds.cred('pythonanywhere')
 
     # download access log from website host	
@@ -32,20 +32,20 @@ def get_access_log():
             writer = csv.writer(reduced, delimiter='\t', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
             for row in reader:
-                remote_ip = row[0]
-                local_time = row[3].lstrip('[')
-                path = row[5].split(' ')[1].lstrip('GET ')
-                status = int(row[6])
-                user_agent = row[9]
-                response_time = float(row[11].split('=')[1])
+                remote_ip 		= row[0]
+                local_time 		= row[3].lstrip('[')
+                path 			= row[5].split(' ')[1].lstrip('GET ')
+                status 			= int(row[6])
+                user_agent 		= row[9]
+                response_time 	= float(row[11].split('=')[1])
 				
                 writer.writerow([remote_ip, local_time, path, status, user_agent, response_time, get_access_timestamp(local_time)])
 
 try:
-	get_access_log()
+    get_access_log()
 except Exception as e:
-	print('Error pulling access log: {}'.format(e))
-	sys.exit()
+    print('Error pulling access log: {}'.format(e))
+    sys.exit()
 
 try:
     conn = get_db_creds.db_conn('access_log_main')
