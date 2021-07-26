@@ -7,5 +7,5 @@
 SELECT *
 FROM access_log 
 WHERE path SIMILAR TO '%myShelter=[0-9]*'
-ORDER BY local_time DESC
+ORDER BY access_timestamp DESC
 LIMIT 2500;
